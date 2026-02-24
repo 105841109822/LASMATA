@@ -33,7 +33,7 @@ LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) adalah sistem manajemen aspi
 ---
 
 ## 🚀 Cara Kerja Platform
-
+```mermaid
 graph TD
     %% Konfigurasi Warna (Styling)
     classDef warga fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#064e3b,rx:10px,ry:10px;
@@ -81,7 +81,6 @@ graph TD
     
     %% Manajemen NIK
     A4 ===|Tambah/Edit NIK| S3
-
 ---
 
 ## 🛠️ Tech Stack (Teknologi yang Digunakan)
