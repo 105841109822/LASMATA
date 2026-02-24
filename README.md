@@ -81,7 +81,7 @@ graph TD
     
     %% Manajemen NIK
     A4 ===|Tambah/Edit NIK| S3
----
+```
 
 ## 🛠️ Tech Stack (Teknologi yang Digunakan)
 
@@ -106,6 +106,90 @@ graph TD
 
 ---
 
+## 📊 Database Schema Overview
+```mermaid
+erDiagram
+    %% Tabel Utama Aplikasi
+    NIKRecord ||--o{ Report : "mempunyai (1:N)"
+    
+    NIKRecord {
+        String nik PK "16 Digit (VarChar)"
+        String name "VarChar(100)"
+        Boolean isActive "Default: true"
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    Report {
+        String id PK "CUID"
+        String nik FK "Relasi ke NIKRecord"
+        String title "VarChar(50)"
+        String category "VarChar(100)"
+        Location location "Enum (DUSUN 1-5)"
+        String description "VarChar(500)"
+        ReportStatus status "Enum (DRAFT, IN_PROGRESS, COMPLETED)"
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    RateLimitRecord {
+        String ip PK
+        Int attempts "Default: 0"
+        DateTime blockedUntil "Nullable"
+        DateTime lastAttempt
+    }
+
+    %% Tabel Autentikasi (Better Auth)
+    user ||--o{ session : "memiliki (1:N)"
+    user ||--o{ account : "memiliki (1:N)"
+
+    user {
+        String id PK
+        String name
+        String email UK "Unique"
+        Boolean emailVerified
+        String image "Nullable"
+        String role "Nullable"
+        Boolean banned "Nullable"
+        String banReason "Nullable"
+        DateTime banExpires "Nullable"
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    session {
+        String id PK
+        String userId FK "Relasi ke user"
+        String token UK "Unique"
+        DateTime expiresAt
+        String ipAddress "Nullable"
+        String userAgent "Nullable"
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    account {
+        String id PK
+        String userId FK "Relasi ke user"
+        String accountId
+        String providerId
+        String accessToken "Nullable, Text"
+        String refreshToken "Nullable, Text"
+        String password "Nullable"
+        DateTime createdAt
+        DateTime updatedAt
+    }
+
+    verification {
+        String id PK
+        String identifier
+        String value "Text"
+        DateTime expiresAt
+        DateTime createdAt "Nullable"
+        DateTime updatedAt "Nullable"
+    }
+```
+
 ## 🚀 Setup & Instalasi Lokal
 
 ### Prasyarat
@@ -119,3 +203,54 @@ graph TD
    ```bash
    git clone [https://github.com/username-anda/lasmata-web.git](https://github.com/username-anda/lasmata-web.git)
    cd lasmata-web
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   atau menggunakan bun
+   bun install
+   
+3. **Setup Environment Variables**
+   ```bash
+    - Database Configuration (Dapatkan dari dashboard Neon)
+    DATABASE_URL="postgresql://[user]:[password]@[host]/[dbname]?sslmode=require"
+    
+    - Setup Admin Pertama (Untuk Seeding)
+    SEED_ADMIN_EMAIL="admin@desakita.id"
+    SEED_ADMIN_PASSWORD="ganti-password-sebelum-seed"
+    SEED_ADMIN_NAME="Administrator"
+   
+4. **Setup Database (Prisma)**
+   ```bash
+    bun run db:generate
+    bun run db:migrate
+
+   - Masukkan data dummy / admin awal ke database:
+    bun run db:seed
+    
+5. **Jalankan Development Server**
+   ```bash
+   bun run dev / bun dev
+   atau menggunakan npm
+   npm run dev
+
+6. **Akses Aplikasi**
+   
+    Halaman Warga: http://localhost:3000
+    Halaman Login Admin: http://localhost:3000/login
+
+7. **Daftar Perintah (Scripts)**
+   ```bash
+    npm run dev           # Menjalankan server lokal (localhost:3000)
+    npm run build         # Mem-build aplikasi untuk production
+    bun run db:generate   # Meng-generate Prisma Client
+    bun run db:migrate    # Menjalankan migrasi database ke Neon
+    bun run db:seed       # Memasukkan akun admin dari file .env ke database
+    bun run db:studio     # Membuka UI Prisma Studio untuk melihat isi database
+
+## 🤝 Kepemilikan & Pengembangan
+Proyek LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) ini dikembangkan oleh:
+
+#### Dayang Aisyah, Wa Nanda Sulystrian & M. Ray Togubu - Universitas Muhammadiyah Makassar
+
+Produk ini diajukan untuk memenuhi persyaratan Product Tugas Kampus.
