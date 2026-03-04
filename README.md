@@ -241,8 +241,8 @@ erDiagram
 
 7. **Daftar Perintah (Scripts)**
    ```bash
-    npm run dev           # Menjalankan server lokal (localhost:3000)
-    npm run build         # Mem-build aplikasi untuk production
+    bun run dev           # Menjalankan server lokal (localhost:3000)
+    bun run build         # Mem-build aplikasi untuk production
     bun run db:generate   # Meng-generate Prisma Client
     bun run db:migrate    # Menjalankan migrasi database ke Neon
     bun run db:seed       # Memasukkan akun admin dari file .env ke database
