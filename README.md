@@ -1,4 +1,4 @@
-# 🏛️ LASMATA - Layanan Aspirasi Masyarakat Desa Tembalae
+# 🏛️ LASMATA - *L*ayanan *A*spira*S*i *M*asyarakat Des*A* *T*embal*A*e
 
 Platform transparansi publik berbasis web untuk menyampaikan aspirasi, keluhan, dan saran pembangunan untuk Desa Tembalae. Proyek ini dikembangkan untuk memfasilitasi komunikasi digital yang terintegrasi antara masyarakat dan instansi pemerintahan desa.
 
