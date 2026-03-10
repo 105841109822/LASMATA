@@ -53,29 +53,31 @@ export async function getSpamStats(nik: string) {
     const sevenDaysAgo = new Date();
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - DAYS_IN_WEEK);
 
-    const { data: reportsInLastWeek, error } = await db
-      .from("Report")
-      .select("id, title, createdAt")
-      .eq("nik", nik)
-      .gte("createdAt", sevenDaysAgo.toISOString())
-      .order("createdAt", { ascending: false });
-
-    if (error) {
-      console.error("Error getting spam stats:", error);
-      return {
-        count: 0,
-        remaining: MAX_REPORTS_PER_WEEK,
-        reports: [],
-      };
-    }
+    // PERBAIKAN: Menggunakan sintaks Prisma yang benar
+    const reportsInLastWeek = await prisma.report.findMany({
+      where: {
+        nik: nik,
+        createdAt: {
+          gte: sevenDaysAgo,
+        },
+      },
+      select: {
+        id: true,
+        title: true,
+        createdAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
 
     return {
-      count: reportsInLastWeek?.length || 0,
+      count: reportsInLastWeek.length,
       remaining: Math.max(
         0,
-        MAX_REPORTS_PER_WEEK - (reportsInLastWeek?.length || 0),
+        MAX_REPORTS_PER_WEEK - reportsInLastWeek.length,
       ),
-      reports: reportsInLastWeek || [],
+      reports: reportsInLastWeek,
     };
   } catch (error) {
     console.error("Error getting spam stats:", error);
