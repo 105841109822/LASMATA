@@ -28,11 +28,11 @@ const categories = [
 ];
 
 const locations = [
-  { value: "DUSUN_1", label: "Dusun 1" },
-  { value: "DUSUN_2", label: "Dusun 2" },
-  { value: "DUSUN_3", label: "Dusun 3" },
-  { value: "DUSUN_4", label: "Dusun 4" },
-  { value: "DUSUN_5", label: "Dusun 5" },
+  { value: "DUSUN_PELITA", label: "Dusun Pelita" },
+  { value: "DUSUN_RASABOU", label: "Dusun Rasabou" },
+  { value: "DUSUN_LAWITI", label: "Dusun Lawiti" },
+  { value: "DUSUN_RESTU", label: "Dusun Restu" },
+  { value: "DUSUN_NATA_KEHE", label: "Dusun Nata Kehe" },
 ];
 
 interface FormData {
