@@ -33,14 +33,14 @@ export function CollaborationSection() {
             className="border-primary text-primary hover:bg-primary hover:text-white dark:hover:text-primary"
             asChild
           >
-            <a
+            {/* <a
               href="https://Tembalae.com"
               target="_blank"
               rel="noopener noreferrer"
             >
               Website Utama
               <ExternalLink className="ml-2 h-4 w-4" />
-            </a>
+            </a> */}
           </Button>
         </motion.div>
       </div>
