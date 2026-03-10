@@ -79,7 +79,7 @@ export async function submitReportAction(data: {
         nik: validatedData.nik,
         title: validatedData.title,
         category: validatedData.category,
-        location: validatedData.location as import("@prisma/client").Location,
+        location: validatedData.location as any,
         description: validatedData.description,
         status: "DRAFT",
       },
