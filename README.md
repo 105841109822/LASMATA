@@ -6,7 +6,7 @@ Platform transparansi publik berbasis web untuk menyampaikan aspirasi, keluhan, 
 
 ## 📋 Tentang Proyek
 
-LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) adalah sistem manajemen aspirasi masyarakat yang dirancang khusus untuk meningkatkan transparansi dan partisipasi warga dalam pembangunan desa. Platform ini menyediakan kanal komunikasi dua arah antara masyarakat dan pemerintah desa secara modern, responsif, dan akuntabel.
+LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) adalah sistem manajemen aspirasi masyarakat yang dirancang untuk mengikuti alur kerja layanan publik desa secara langsung: warga mengirim aspirasi, data divalidasi, laporan disimpan, lalu admin menindaklanjuti dan memperbarui statusnya.
 
 ### 🎯 Tujuan Utama
 
@@ -15,20 +15,55 @@ LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) adalah sistem manajemen aspi
 - **Akuntabilitas**: Membantu pemerintah desa dalam mendokumentasikan dan menindaklanjuti aspirasi masyarakat secara terstruktur.
 - **Validitas**: Memastikan laporan yang masuk berasal dari warga asli desa melalui sistem verifikasi Nomor Induk Kependudukan (NIK).
 
-### ✨ Fitur Utama
+## 🧭 Alur Program
 
-#### Untuk Masyarakat:
-- 📝 **Pengajuan Aspirasi Online** - Formulir pengajuan yang mudah digunakan dengan validasi NIK terdaftar.
-- 🔍 **Tracking Status** - Melihat status penanganan aspirasi (Menunggu, Diproses, Selesai).
-- 📊 **Dashboard Publik** - Transparansi data daftar aspirasi yang telah masuk dari warga lain.
+### 1. Akses Publik
+- Pengguna membuka halaman utama LASMATA.
+- Halaman utama menampilkan informasi layanan, tombol kirim aspirasi, dan elemen pendukung seperti navigasi, fitur, testimoni, dan FAQ.
+- Pengguna juga bisa membuka halaman daftar aspirasi publik untuk melihat laporan yang sudah masuk.
+
+### 2. Pengajuan Aspirasi
+- Pengguna mengisi form aspirasi dengan NIK, kategori, lokasi, judul, dan isi laporan.
+- Sistem memvalidasi NIK terlebih dahulu melalui data master NIK.
+- Jika NIK valid dan aktif, laporan dikirim ke server.
+- Server menjalankan validasi schema, rate limit, dan pengecekan anti-spam sebelum menyimpan data.
+- Laporan baru disimpan dengan status `DRAFT`, lalu halaman publik dan dashboard di-*revalidate*.
+
+### 3. Daftar Aspirasi Publik
+- Halaman aspirasi publik mengambil data laporan dari server action.
+- Data ditampilkan dengan fitur filter, sort, pagination, dan detail laporan.
+- Status laporan ditampilkan dalam bahasa pengguna seperti Draft, Diproses, dan Diselesaikan.
+
+### 4. Login Admin
+- Admin membuka halaman login.
+- Sistem autentikasi menggunakan Better Auth melalui endpoint `/api/auth/[...all]`.
+- Jika login berhasil, pengguna diarahkan ke dashboard admin.
+- Proxy/guard route memastikan halaman dashboard hanya bisa diakses saat sesi aktif tersedia.
+
+### 5. Dashboard Admin
+- Dashboard utama menampilkan statistik laporan.
+- Admin dapat membuka halaman manajemen laporan untuk mencari, memfilter, dan mengubah status laporan.
+- Admin juga dapat membuka halaman manajemen NIK untuk menambah, mengubah, atau menonaktifkan NIK.
+- Admin dapat mengelola profil, password, dan sesi login yang aktif.
+
+### 6. Database dan Sinkronisasi
+- Semua data inti tersimpan di PostgreSQL melalui Prisma.
+- Perubahan pada laporan, NIK, profil, atau sesi memicu revalidation agar tampilan publik dan dashboard tetap sinkron.
+
+## ✨ Fitur Utama
+
+### Untuk Masyarakat
+- 📝 **Pengajuan Aspirasi Online** - Formulir pengajuan dengan validasi NIK terdaftar.
+- 🔍 **Tracking Status** - Melihat status penanganan aspirasi dari Draft sampai Diselesaikan.
+- 📊 **Dashboard Publik** - Transparansi daftar aspirasi yang telah masuk.
 - 🌓 **Dark/Light Mode** - Antarmuka yang nyaman di mata dengan dukungan mode gelap dan terang.
 
-#### Untuk Administrator (Perangkat Desa):
-- 🔐 **Autentikasi Aman** - Sistem login admin terlindungi menggunakan Better Auth.
+### Untuk Administrator (Perangkat Desa)
+- 🔐 **Autentikasi Aman** - Login admin terlindungi menggunakan Better Auth.
 - 📊 **Dashboard Admin** - Statistik dan ikhtisar seluruh laporan yang masuk.
 - ✅ **Manajemen Status Laporan** - Memperbarui status tindak lanjut laporan warga.
-- 👥 **Manajemen Master NIK** - Menambah, mengedit, dan mengelola *database* NIK warga yang diizinkan melapor.
-- 🔒 **Manajemen Akun** - Pembaruan profil dan kata sandi administrator.
+- 👥 **Manajemen Master NIK** - Menambah, mengedit, dan mengelola database NIK warga yang diizinkan melapor.
+- 🔒 **Manajemen Akun** - Pembaruan profil, kata sandi, dan sesi administrator.
 
 ---
 
