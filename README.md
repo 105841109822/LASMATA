@@ -34,53 +34,75 @@ LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) adalah sistem manajemen aspi
 
 ## 🚀 Cara Kerja Platform
 ```mermaid
-graph TD
-    %% Konfigurasi Warna (Styling)
-    classDef warga fill:#d1fae5,stroke:#059669,stroke-width:2px,color:#064e3b,rx:10px,ry:10px;
-    classDef admin fill:#e0e7ff,stroke:#4f46e5,stroke-width:2px,color:#312e81,rx:10px,ry:10px;
-    classDef sistem fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#78350f;
-    classDef db fill:#f3f4f6,stroke:#4b5563,stroke-width:2px,color:#1f2937;
+flowchart TD
+    A[Pengguna buka aplikasi] --> B{Pilih jalur}
 
-    subgraph Masyarakat [👨‍👩‍👧‍👦 ALUR MASYARAKAT]
-        direction TB
-        M1[🌐 Akses Website LASMATA]:::warga
-        M2[📝 Isi Formulir Aspirasi<br/>NIK, Kategori, Lokasi, dll]:::warga
-        M3[👀 Lihat Laporan di<br/>Halaman Publik]:::warga
-    end
+    B --> C[Halaman publik]
+    B --> D[Login admin]
+    B --> E[Lihat daftar aspirasi publik]
 
-    subgraph Core [⚙️ SISTEM & DATABASE]
-        direction TB
-        S1{🔍 Validasi NIK}:::sistem
-        S2[(💾 Database Laporan<br/>Status: MENUNGGU)]:::db
-        S3[(📋 Master Data NIK)]:::db
-    end
+    C --> F[Klik Kirim Aspirasi]
+    F --> G[Isi form: NIK, kategori, lokasi, judul, isi]
+    G --> H[Validasi NIK]
+    H --> I{NIK valid dan aktif?}
+    I -- Tidak --> J[Tampilkan error validasi]
+    J --> G
+    I -- Ya --> K[Submit laporan]
 
-    subgraph PerangkatDesa [👨‍💼 ALUR ADMINISTRATOR]
-        direction TB
-        A1[🔑 Login Portal Admin]:::admin
-        A2[📊 Tinjau Laporan Baru<br/>di Dashboard]:::admin
-        A3[✅ Ubah Status Laporan<br/>DIPROSES / SELESAI]:::admin
-        A4[👥 Kelola Data NIK<br/>Tambah Warga Baru]:::admin
-    end
+    K --> L[Rate limit berdasarkan IP]
+    L --> M{Melebihi batas?}
+    M -- Ya --> N[Tolak submit dan tampilkan pesan limit]
+    M -- Tidak --> O[Validasi schema data]
 
-    %% Relasi Alur Masyarakat
-    M1 --> M2
-    M2 -->|Kirim Data| S1
-    S1 -- NIK Tidak Valid --> M2
-    S1 -- NIK Valid --> S2
-    S2 -->|Tampil Secara Publik| M3
+    O --> P{Data valid?}
+    P -- Tidak --> Q[Tolak submit dan tampilkan error]
+    P -- Ya --> R[Cek anti-spam berdasarkan NIK]
 
-    %% Relasi Database
-    S3 -.->|Pengecekan| S1
-    
-    %% Relasi Alur Administrator
-    A1 --> A2
-    S2 ===|Data Laporan Masuk| A2
-    A2 --> A3
-    A3 ===|Update Status Database| S2
-    
-    %% Manajemen NIK
-    A4 ===|Tambah/Edit NIK| S3
+    R --> S{Aman?}
+    S -- Tidak --> T[Tolak submit dan tampilkan pesan spam]
+    S -- Ya --> U[Simpan laporan status DRAFT ke database]
+    U --> V[Revalidate halaman dashboard dan aspirasi]
+    V --> W[Tampilkan sukses ke pengguna]
+
+    E --> X[Ambil laporan publik dari server action]
+    X --> Y[Filter, sort, pagination di UI]
+    Y --> Z[Lihat detail aspirasi]
+
+    D --> AA[Input email dan password]
+    AA --> AB[Autentikasi Better Auth]
+    AB --> AC{Login sukses?}
+    AC -- Tidak --> AD[Tampilkan error login]
+    AC -- Ya --> AE[Masuk dashboard]
+
+    AE --> AF{Akses route dashboard}
+    AF --> AG[Proxy cek session]
+    AG --> AH{Session ada?}
+    AH -- Tidak --> AI[Redirect ke login]
+    AH -- Ya --> AJ[Render halaman admin]
+
+    AJ --> AK{Fitur admin}
+    AK --> AL[Kelola laporan]
+    AK --> AM[Kelola NIK]
+    AK --> AN[Kelola profil, password, dan sesi]
+
+    AL --> AO[Ambil daftar laporan]
+    AO --> AP[Filter, cari, sort]
+    AP --> AQ[Ubah status laporan]
+    AQ --> AR[Update database dan revalidate]
+    AR --> AS[Perubahan tampil di dashboard dan publik]
+
+    AM --> AT[Ambil data NIK]
+    AT --> AU[Tambah, edit, nonaktifkan NIK]
+    AU --> AV[Update database dan revalidate]
+
+    AN --> AW[Ambil session aktif]
+    AW --> AX[Update profil atau password atau revoke session]
+    AX --> AY[Update auth/session di database]
+
+    U --> DB[(PostgreSQL via Prisma)]
+    AO --> DB
+    AU --> DB
+    AY --> DB
 ```
 
 ## 🛠️ Tech Stack (Teknologi yang Digunakan)
