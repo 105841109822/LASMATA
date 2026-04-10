@@ -339,6 +339,6 @@ erDiagram
 ## 🤝 Kepemilikan & Pengembangan
 Proyek LASMATA (Layanan Aspirasi Masyarakat Desa Tembalae) ini dikembangkan oleh:
 
-#### Dayang Aisyah, Wa Nanda Sulystrian & M. Ray Togubu - Universitas Muhammadiyah Makassar
+#### Dayang Aisyah, Wa Nanda Sulystrian, M. Ray Togubu & Baso Hamzah - Universitas Muhammadiyah Makassar
 
 Produk ini diajukan untuk memenuhi persyaratan Product/project Tugas Kampus.
