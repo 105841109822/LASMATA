@@ -58,8 +58,7 @@ export function Footer() {
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.label}
                     </Link>
                   )}
@@ -95,8 +94,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-                  aria-label={social.label}
-                >
+                  aria-label={social.label}>
                   <social.icon className="h-4 w-4" />
                 </a>
               ))}
@@ -115,12 +113,11 @@ export function Footer() {
           </p>
           <p>
             <Link
-              href="https://instagram.com/kkn.karangbarutimur"
+              href="https://www.instagram.com/dy_ais29?igsh=aWpkN28ydTV1Zm55"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary transition-colors"
-            >
-              Dipersembahkan oleh Unismuh Student Day, Nanda & Ray.
+              className="text-primary transition-colors">
+              Crafted by Unismuh Student Team.
             </Link>
           </p>
         </div>

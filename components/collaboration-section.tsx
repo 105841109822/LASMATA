@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
 
 export function CollaborationSection() {
   return (
@@ -13,35 +11,20 @@ export function CollaborationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="space-y-6"
-        >
+          className="space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground leading-relaxed">
             Dipersembahkan oleh
             <br />
             <span className="text-primary">Desa Tembalae</span>
             <br />
-            Bersama <span className="text-primary">Unismuh Student</span>
+            Bersama <span className="text-primary">Tim Pengembang LASMATA</span>
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto">
-            Kolaborasi antara masyarakat dan staf desa Karang Baru Timur dengan
-            mahasiswa Dayang Aisyah, Wa Nanda Sulystrian & M. Ray Togubu Fakultas Teknik Universitas Muhammadiyyah Makassar untuk
-            menciptakan transparansi dan kemudahan akses layanan publik.
+            Sebuah wujud sinergi antara masyarakat dan aparatur Desa Tembalae
+            bersama rekan-rekan mahasiswa dari Fakultas Teknik Universitas
+            Muhammadiyah Makassar dalam menciptakan transparansi dan kemudahan
+            akses layanan publik.
           </p>
-          <Button
-            size="default"
-            variant="outline"
-            className="border-primary text-primary hover:bg-primary hover:text-white dark:hover:text-primary"
-            asChild
-          >
-            {/* <a
-              href="https://Tembalae.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Website Utama
-              <ExternalLink className="ml-2 h-4 w-4" />
-            </a> */}
-          </Button>
         </motion.div>
       </div>
     </section>
