@@ -66,21 +66,6 @@ LASMATA dibangun dengan Next.js App Router dan server action agar proses pengaju
 - Semua data inti tersimpan di PostgreSQL melalui Prisma.
 - Perubahan pada laporan, NIK, profil, atau sesi memicu revalidation agar tampilan publik dan dashboard tetap sinkron.
 
-## ✨ Fitur Utama
-
-### Untuk Masyarakat
-- 📝 **Pengajuan Aspirasi Online** - Formulir pengajuan dengan validasi NIK terdaftar.
-- 🔍 **Tracking Status** - Melihat status penanganan aspirasi dari Draft sampai Diselesaikan.
-- 📊 **Dashboard Publik** - Transparansi daftar aspirasi yang telah masuk.
-- 🌓 **Dark/Light Mode** - Antarmuka yang nyaman di mata dengan dukungan mode gelap dan terang.
-
-### Untuk Administrator (Perangkat Desa)
-- 🔐 **Autentikasi Aman** - Login admin terlindungi menggunakan Better Auth.
-- 📊 **Dashboard Admin** - Statistik dan ikhtisar seluruh laporan yang masuk.
-- ✅ **Manajemen Status Laporan** - Memperbarui status tindak lanjut laporan warga.
-- 👥 **Manajemen Master NIK** - Menambah, mengedit, dan mengelola database NIK warga yang diizinkan melapor.
-- 🔒 **Manajemen Akun** - Pembaruan profil, kata sandi, dan sesi administrator.
-
 ---
 
 ## 🚀 Cara Kerja Platform
