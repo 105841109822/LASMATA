@@ -3,11 +3,11 @@ import { z } from "zod";
 const alphanumericPattern = /^[a-zA-Z0-9\s]+$/;
 
 export const ReportLocation = z.enum([
-  "DUSUN_1",
-  "DUSUN_2",
-  "DUSUN_3",
-  "DUSUN_4",
-  "DUSUN_5",
+  "DUSUN_PELITA",
+  "DUSUN_RASABOU",
+  "DUSUN_LAWITI",
+  "DUSUN_RESTU",
+  "DUSUN_NATA_KEHE",
 ]);
 
 const validCategories = [
