@@ -38,11 +38,13 @@ import {
   Plus,
   Edit,
   UserX,
+  UserCheck,
 } from "lucide-react";
 import { getNIKRecordsAction } from "@/app/actions/admin/get-nik-records";
 import { addNIKAction } from "@/app/actions/admin/add-nik";
 import { updateNIKAction } from "@/app/actions/admin/update-nik";
 import { deactivateNIKAction } from "@/app/actions/admin/deactivate-nik";
+import { activateNIKAction } from "@/app/actions/admin/activate-nik";
 import { toast } from "sonner";
 
 const ITEMS_PER_PAGE = 10;
@@ -218,7 +220,17 @@ export function NIKManagementContent() {
         toast.error(result.error);
       }
     } else {
-      toast.info("Untuk mengaktifkan kembali, gunakan tombol Edit");
+      // Activate
+      const result = await activateNIKAction(nik);
+      if (result.success) {
+        toast.success(result.message);
+        setNikRecords(nikRecords.map(n =>
+          n.nik === nik ? { ...n, isActive: true, updatedAt: new Date() } : n
+        ));
+        setTotalActiveNIK(totalActiveNIK + 1);
+      } else {
+        toast.error(result.error);
+      }
     }
   };
 
@@ -445,7 +457,11 @@ export function NIKManagementContent() {
                             : "gap-1"
                         }
                       >
-                        <UserX className="h-3.5 w-3.5" />
+                        {record.isActive ? (
+                          <UserX className="h-3.5 w-3.5" />
+                        ) : (
+                          <UserCheck className="h-3.5 w-3.5" />
+                        )}
                         {record.isActive ? "Nonaktifkan" : "Aktifkan"}
                       </Button>
                     </div>
