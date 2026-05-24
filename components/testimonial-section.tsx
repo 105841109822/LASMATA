@@ -9,27 +9,27 @@ import { Button } from "@/components/ui/button";
 const testimonials = [
   {
     name: "Bapak Rizal",
-    location: "Warga Dusun 1",
+    location: "Dusun restu",
     text: "Platform ini sangat membantu kami menyampaikan keluhan infrastruktur jalan. Responnya cepat dan transparan.",
   },
   {
     name: "Ibu Siti",
-    location: "Dusun 2",
+    location: "Dusun nata kehe",
     text: "Dengan LASMATA, saya merasa lebih dekat dengan pemerintah desa. Aspirasi kami benar-benar didengar.",
   },
   {
     name: "Bapak Mail",
-    location: "Dusun 3",
+    location: "Dusun pelita",
     text: "Sistem yang mudah digunakan. Harapan saya pembangunan desa semakin baik dengan adanya platform ini.",
   },
   {
     name: "Ibu Aisyah",
-    location: "Dusun 4",
+    location: "Dusun rasa bou",
     text: "Terima kasih LASMATA, sekarang tidak perlu datang langsung ke kantor desa untuk menyampaikan keluhan.",
   },
   {
     name: "Bapak Hamdan",
-    location: "Dusun 5",
+    location: "Dusun lawiti",
     text: "Transparansi yang luar biasa. Saya bisa melihat bagaimana aspirasi saya ditindaklanjuti dengan jelas.",
   },
 ];
