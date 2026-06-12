@@ -45,7 +45,7 @@ export const auth = betterAuth({
   plugins: [
     multiSession({ maximumSessions: 5 }),
     admin({ defaultRole: "user" }),
-    nextCookies(), 
+    nextCookies(),
   ],
 });
 

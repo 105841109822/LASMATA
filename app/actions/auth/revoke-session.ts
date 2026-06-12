@@ -7,7 +7,11 @@ import { revalidatePath } from "next/cache";
 export async function revokeSessionAction(sessionId: string) {
   try {
     const session = await getSession();
-    if (!session) return { success: false, error: "Sesi Anda tidak valid atau telah dihapus" };
+    if (!session)
+      return {
+        success: false,
+        error: "Sesi Anda tidak valid atau telah dihapus",
+      };
 
     const target = await prisma.session.findUnique({
       where: { id: sessionId },
@@ -45,7 +49,11 @@ export async function revokeSessionAction(sessionId: string) {
 export async function revokeAllOtherSessionsAction() {
   try {
     const session = await getSession();
-    if (!session) return { success: false, error: "Sesi Anda tidak valid atau telah dihapus" };
+    if (!session)
+      return {
+        success: false,
+        error: "Sesi Anda tidak valid atau telah dihapus",
+      };
 
     // Hapus semua sesi lain milik user ini kecuali sesi saat ini
     const result = await prisma.session.deleteMany({
